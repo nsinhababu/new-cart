@@ -14,9 +14,9 @@ const itemsArr = [
     price: 320,
   },
   {
-    name: 'Pens',
+    name: 'Pens(pack of 50)',
     imgSrc: 'img/PEN.webp',
-    quantity: 50,
+    quantity: 1,
     price: 250,
   },
   {
@@ -26,9 +26,9 @@ const itemsArr = [
     price: 200,
   },
   {
-    name: 'Hand sanitizer ',
+    name: 'Hand sanitizer(5bottles) ',
     imgSrc: 'img/sanitizer.jpg',
-    quantity: 5,
+    quantity: 1,
     price: 500,
   },
   {
@@ -44,9 +44,9 @@ const itemsArr = [
     price: 899,
   },
   {
-    name: 'iodex',
+    name: 'iodex(50g)',
     imgSrc: 'img/iodex.jpg',
-    quantity: 50,
+    quantity: 1,
     price: 80,
   },
   {
@@ -119,44 +119,52 @@ for (let i = 0; i < itemsArr.length; i++) {
 }
 
 //cart part
-// let title = document.getElementsByTagName('title');
-// console.log(title);
 
 let cartContainer = document.createElement('div');
 cartContainer.classList.add('cart-container');
 document.body.appendChild(cartContainer);
-console.log(cartContainer);
 
-// function sendToCart() {
-//   let cartItemContainer = document.createElement('div');
-//   cartContainer.appendChild(cartItemContainer);
-//   cartItemContainer.classList.add('cart-item-container');
-//   cartItemContainer.innerHTML = container.children[i];
-// }
 let cartItemsArr = [];
-for (let i = 0; i < itemsArr.length; i++) {
+
+for (let i, j = 0; i < itemsArr.length && j < cartItemsArr.length; i++, j++) {
+  // for (let i = 0; i < itemsArr.length; i++) {
   btn[i].addEventListener('click', function () {
     let cartItemContainer = document.createElement('div');
-    cartContainer.appendChild(cartItemContainer);
     cartItemContainer.classList.add('cart-item-container');
-    cartItemsArr.push(container.children[i].innerHTML);
-    // if (cartItemsArr.includes(container.children[i].innerHTML) === false) {
-    //   cartItemsArr.push(container.children[i].innerHTML);
-    //   cartItemContainer.innerHTML = cartItemsArr[i].innerHTML;
-    // } else {
-    //   itemElement[2].innerText = `Quantity: ${itemsArr[i].quantity++}`;
-    // }
 
-    // // cartItemsArr[j]
-    // //   ? function () {
-    // //       itemElement[3].innerText = `Price: Rs.${itemsArr[i].quantity++}`;
-    // //     }
-    // //   : cartItemsArr.push(container.children[i].innerHTML);
-    // // cartItemContainer.innerHTML = cartItemsArr[cartItemsArr.length - 1];
+    //another
 
-    // console.log(cartItemsArr);
-    // console.log(cartItemsArr[cartItemsArr.length - 1]);
+    if (cartItemsArr[i] !== container.children[i].innerHTML) {
+      cartContainer.appendChild(cartItemContainer);
+      cartItemsArr.push(container.children[i].innerHTML);
 
-    cartItemContainer.innerHTML = container.children[i].innerHTML;
+      cartItemContainer.innerHTML += cartItemsArr[cartItemsArr.length - 1];
+    } else {
+      cartContainer.children[i].children[2].innerText = `Quantity: ${(itemsArr[
+        i
+      ].quantity += 1)}`;
+    }
   });
 }
+
+// after 135
+// if (cartItemsArr.includes(cartItemContainer[i] === true)) {
+//   itemElement[2].innerText = `Quantity: ${itemsArr[i].quantity++}`;
+// } else {
+//   cartItemsArr.push(cartItemContainer[i]);
+//   cartItemContainer.innerHTML = cartItemsArr[i];
+//   console.log(cartItemsArr[i]);
+// }
+
+//another
+
+// if (cartItemsArr[i] === container.children[i].innerHTML) {
+//   cartContainer.children[i].children[2].innerText = `Quantity: ${(itemsArr[
+//     i
+//   ].quantity += 1)}`;
+// } else {
+//   cartContainer.appendChild(cartItemContainer);
+//   cartItemsArr.push(container.children[i].innerHTML);
+
+//   cartItemContainer.innerHTML += cartItemsArr[cartItemsArr.length - 1];
+// }
