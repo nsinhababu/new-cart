@@ -71,9 +71,10 @@ const itemsArr = [
 
 //html for items
 
-const container = document.createElement('div');
+let container = document.createElement('div');
 container.classList.add('container');
 document.body.appendChild(container);
+const containerDiv = document.getElementsByClassName('container');
 
 let itemContainer;
 let img;
@@ -105,7 +106,7 @@ for (let i = 0; i < itemsArr.length; i++) {
   button.classList.add('btn');
   itemContainer.appendChild(button);
 }
-let btn = document.getElementsByClassName('btn');
+const btn = document.getElementsByClassName('btn');
 
 //assigning items to created html
 
@@ -117,7 +118,6 @@ for (let i = 0; i < itemsArr.length; i++) {
   itemElement[2].innerText = `Quantity: ${itemsArr[i].quantity}`;
   itemElement[3].innerText = `Price: Rs.${itemsArr[i].price}`;
 }
-
 //cart part
 
 let cartContainer = document.createElement('div');
@@ -125,46 +125,115 @@ cartContainer.classList.add('cart-container');
 document.body.appendChild(cartContainer);
 
 let cartItemsArr = [];
-
-for (let i, j = 0; i < itemsArr.length && j < cartItemsArr.length; i++, j++) {
-  // for (let i = 0; i < itemsArr.length; i++) {
+let quantityNumber;
+let cartButton;
+let j = -1;
+let cartButtonContainer;
+for (let i = 0; i < itemsArr.length; i++) {
   btn[i].addEventListener('click', function () {
+    j++;
+    cartItemsArr.push(container.children[i].innerHTML);
     let cartItemContainer = document.createElement('div');
     cartItemContainer.classList.add('cart-item-container');
+    cartContainer.appendChild(cartItemContainer);
+    let newElemSet =
+      '<button class = "decrease-btn">-</button> <button class = "increase-btn">+</button> <button class = "remove-btn">Remove</button>';
+    cartItemContainer.innerHTML +=
+      cartItemsArr[cartItemsArr.length - 1] + newElemSet;
 
-    //another
+    let newElem = document.createElement('p');
 
-    if (cartItemsArr[i] !== container.children[i].innerHTML) {
-      cartContainer.appendChild(cartItemContainer);
-      cartItemsArr.push(container.children[i].innerHTML);
+    newElem.innerText = 'Visit Cart';
+    newElem.classList = 'deactivated';
+    this.parentNode.replaceChild(newElem, this);
+    console.log(j);
+    cartButton = cartContainer.children[j].children[4];
+    cartButton.remove();
 
-      cartItemContainer.innerHTML += cartItemsArr[cartItemsArr.length - 1];
-    } else {
-      cartContainer.children[i].children[2].innerText = `Quantity: ${(itemsArr[
-        i
-      ].quantity += 1)}`;
-    }
+    // cartButton.classList.add('cart-button');
+    // cartButton.classList.remove('btn');
+    // cartButton.innerText = 'Delete';
+    // cartButton.addEventListener('click', function () {
+    //   cartItemsArr.pop(cartItemsArr[i]);
+    // });
+    // console.log(cartButton);
   });
 }
 
-// after 135
-// if (cartItemsArr.includes(cartItemContainer[i] === true)) {
-//   itemElement[2].innerText = `Quantity: ${itemsArr[i].quantity++}`;
+// cartContainer = document.getElementsByClassName('cart-container');
+// cartItemContainer = cartContainer.children;
+// if ((cartItemsArr.length = 0)) {
+//   cartContainer.innerHTML = '<h1>Add items </h1>';
 // } else {
-//   cartItemsArr.push(cartItemContainer[i]);
-//   cartItemContainer.innerHTML = cartItemsArr[i];
-//   console.log(cartItemsArr[i]);
+//   for (j >= 0; j < cartItemsArr.length; j++) {
+//     let newElemSet =
+//       '<button class = "decrease-btn"></button> <button class = "increase-btn"></button> <button class = "remove-btn"></button>';
+//     cartItemContainer[j].appendChild(newElemSet);
+//     console.log('ghanta');
+//   }
+// }
+// console.log(plusButton);
+
+// function cartItemDivCreator() {
+//   cartContainer.innerHTML +=
+//     '<div class="cart-item-container"><img class ="cart-image" src =""><h3 class = "cart-item-name"></h3><h4>Quantity: <span class="cart-quantity"></span> </h4><h4>Price: <span class="cart-price"></span> </h4><button class = "plus">+</button><button class="minus">-</button> </div>';
+//   return;
+// }
+
+// let cartItemImage;
+// let cartItemName;
+// let cartItemQuantity;
+// let cartItemPrice;
+// let cartPlusButton;
+// let cartMinusButton;
+// function cartAssign() {}
+// for (let i = 0; i < itemsArr.length; i++) {
+//   btn[i].addEventListener('click', function () {
+//     cartItemsArr.push(itemsArr[i]);
+//     let newElem = document.createElement('p');
+
+//     newElem.innerText = 'Visit Cart';
+//     newElem.classList = 'deactivated';
+//     this.parentNode.replaceChild(newElem, this);
+//     cartItemDivCreator();
+//     //
+//     cartItemImage = document.querySelectorAll('.cart-image');
+//     cartItemName = document.querySelectorAll('.cart-item-name');
+//     cartItemQuantity = document.querySelectorAll('.cart-quantity');
+//     cartItemPrice = document.querySelectorAll('.cart-price');
+//     cartPlusButton = document.querySelectorAll('.plus');
+//     cartMinusButton = document.querySelectorAll('.minus');
+//     cartItemImage[i].src = cartItemsArr[i].imgSrc;
+//     console.log(cartItemsArr[i].imgSrc);
+//     console.log(cartItemImage[i]);
+//   });
+// }
+// // console.log(cartContainer);
+
+// if (cartItemsArr !== []) {
+//   for (let i = 0; i < cartItemsArr.length; i++) {
+//     cartItemImage[i].src = itemsArr[i].imgSrc;
+//   }
+// }
+
+// for (let i = 0; i < itemsArr.length; i++) {
+//   btn[i].addEventListener('click', function () {
+//     let cartItemContainer = document.createElement('div');
+//     cartItemContainer.classList.add('cart-item-container');
+
+//     //another
+
+//     if (cartItemsArr[i] !== container.children[i].innerHTML) {
+//       cartContainer.appendChild(cartItemContainer);
+//       cartItemsArr.push(container.children[i].innerHTML);
+
+//       cartItemContainer.innerHTML += cartItemsArr[cartItemsArr.length - 1];
+//     } else {
+//       cartContainer.children[i].children[2].innerText = `Quantity: ${(itemsArr[
+//         i
+//       ].quantity += 1)}`;
+//     }
+//   });
 // }
 
 //another
-
-// if (cartItemsArr[i] === container.children[i].innerHTML) {
-//   cartContainer.children[i].children[2].innerText = `Quantity: ${(itemsArr[
-//     i
-//   ].quantity += 1)}`;
-// } else {
-//   cartContainer.appendChild(cartItemContainer);
-//   cartItemsArr.push(container.children[i].innerHTML);
-
-//   cartItemContainer.innerHTML += cartItemsArr[cartItemsArr.length - 1];
-// }
