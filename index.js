@@ -128,6 +128,9 @@ let cartItemsArr = [];
 let quantityNumber;
 let cartButton;
 let j = -1;
+let quantityElemSet =
+  '<button class = "decrease-btn">-</button> <span class = "total-quantity"> 1 </span> <button class = "increase-btn">+</button> </br> <button class = "remove-btn">Remove</button>';
+
 let cartButtonContainer;
 for (let i = 0; i < itemsArr.length; i++) {
   btn[i].addEventListener('click', function () {
@@ -136,10 +139,9 @@ for (let i = 0; i < itemsArr.length; i++) {
     let cartItemContainer = document.createElement('div');
     cartItemContainer.classList.add('cart-item-container');
     cartContainer.appendChild(cartItemContainer);
-    let newElemSet =
-      '<button class = "decrease-btn">-</button> <button class = "increase-btn">+</button> <button class = "remove-btn">Remove</button>';
+
     cartItemContainer.innerHTML +=
-      cartItemsArr[cartItemsArr.length - 1] + newElemSet;
+      cartItemsArr[cartItemsArr.length - 1] + quantityElemSet;
 
     let newElem = document.createElement('p');
 
@@ -149,17 +151,28 @@ for (let i = 0; i < itemsArr.length; i++) {
     console.log(j);
     cartButton = cartContainer.children[j].children[4];
     cartButton.remove();
-
-    // cartButton.classList.add('cart-button');
-    // cartButton.classList.remove('btn');
-    // cartButton.innerText = 'Delete';
-    // cartButton.addEventListener('click', function () {
-    //   cartItemsArr.pop(cartItemsArr[i]);
-    // });
-    // console.log(cartButton);
+    quantityDIv = cartContainer.children[j].children[2];
+    quantityDIv.remove();
   });
 }
 
+do {
+  console.log('baal');
+  const increaseButton = Document.getElementsByClassName('increase-btn');
+  const decreaseButton = Document.getElementsByClassName('decrease-btn');
+  const removeButton = Document.getElementsByClassName('remove-btn');
+  let totalQuantitySpan = Document.getElementsByClassName('total-quantity ');
+
+  for (let x = 0; x < cartItemsArr.length; x++) {
+    cartItemQuantity = totalQuantitySpan[i].innerText;
+    increaseButton[i].addEventListener('click', function () {
+      console.log('increase');
+    });
+    decreaseButton[i].addEventListener('click', function () {
+      console.log('decrease');
+    });
+  }
+} while (cartItemsArr.length > 0);
 // cartContainer = document.getElementsByClassName('cart-container');
 // cartItemContainer = cartContainer.children;
 // if ((cartItemsArr.length = 0)) {
